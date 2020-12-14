@@ -14,6 +14,7 @@ me = f.readline()
 client = discord.Client()
 
 
+
 class writefile():
     f.write(TOKEN)
     f.write(danny)
@@ -57,7 +58,8 @@ def responseSetup(x):
     p = open(x + ".txt", "r+")
     nbp = p.readline()
 
-
+async def on_member_join(member):
+    await member.add_roles(787442178716336161)
 @client.event
 async def on_message(message):
     # we do not want the bot to reply to itself
@@ -69,6 +71,8 @@ async def on_message(message):
     motivation = ['Success is not final, just as failure is not fatal. It is the courage to continue that counts.','Never be afraid of change, dear.','Every day is a day to make a positive change.','Once you realize your worth, then you can unlock your true potential.','Remember, the only thing that makes a hero is courage.']
     thanks = ["thanks charles","thank you, charles", "thanks, charles","thank you charles", "ty charles"]
     love = ['do you love me, charles?', 'do you love me, charles', 'do you love me charles','do you love me charles?']
+    howlove = ['how much do you love me, charles?','how much do you love me, charles','how much do you love me charles?','how much do you love me charles']
+    cool = ["am i cool?","am i cool"]
     with open('people.txt', 'r') as f:
         myNames = [line.strip() for line in f]
     id = message.author.id
@@ -94,6 +98,23 @@ async def on_message(message):
     if message.content.lower() in love:
         person = checkCommon(message.author.id)
         await message.channel.send("Of course I do, " + person)
+    if message.content.lower() in cool:
+        await message.channel.send("No, definitely not.")
+    if message.content.lower() in howlove:
+        #person = checkCommon(message.author.id)
+        meter = random.randint(0,99)
+        if meter <= 40:
+            msg = "I love you " + str(meter) + "% right now... try again later."
+            await message.channel.send(msg)
+        elif meter >= 41 and meter <= 60:
+            msg = "I love you " + str(meter) + "% right now, which is pretty good, considering you ate my muffins."
+            await message.channel.send(msg)
+        elif meter >= 61 and meter <= 80:
+            msg = "I love you " + str(meter) + "% right now, which is technically passing."
+            await message.channel.send(msg)
+        elif meter >= 81:
+            msg = "I love you " + str(meter) + "% right now, which is a lot! Now don't go screwing it up."
+            await message.channel.send(msg)
     for x in myNames:
         if message.content == "naughty boy points " + x:
             y = x.strip(">" + "<")
@@ -115,16 +136,6 @@ async def on_message(message):
             out = checkCommon(x)
             msg = out + " currently has " + str(total) + " points now. Shame.".format(message)
             await message.channel.send(msg)
-
-
-   # elif message.author.id == me:
-        #if message.content.find("love me charles")!= -1:
-           # msg = "You were always my favorite!"
-            #await message.channel.send(msg)
-    #elif message.author.id == danny:
-        #if message.content.find("love me charles")!= -1:
-            #msg = "Can't say I do..."
-            #await message.channel.send(msg)
 
 
 
